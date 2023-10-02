@@ -1,4 +1,4 @@
-//all elements are unique
+//all elements are not unique
 
 #include<iostream>
 using namespace std;
@@ -29,10 +29,19 @@ int main()
         cin>>arr[idx];
     }
 
-    int idxl = largestIndex(arr,5);
-    arr[idxl]=-1;
+    int n =5;
+    int idxl = largestIndex(arr,n);
+    int lele = arr[idxl];
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i]==lele)
+        {
+            arr[i]=-1;
+        }
+    }
+    
 
-    idxl = largestIndex(arr,5);
+    idxl = largestIndex(arr,n);
     cout<<"second largest element is : "<<arr[idxl]<<endl;    
 
     return 0;
