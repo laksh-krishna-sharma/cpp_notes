@@ -1,3 +1,5 @@
+//all elements are unique
+
 #include<iostream>
 using namespace std;
 
