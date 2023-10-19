@@ -8,7 +8,7 @@ void sortSquared(vector<int> &v)
     int rightPt=v.size()-1;
     vector<int> ans;
 
-    while (leftPt<rightPt)
+    while (leftPt<=rightPt)
     {
         if (abs(v[leftPt])<abs(v[rightPt]))
         {
