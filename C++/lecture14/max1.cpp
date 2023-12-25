@@ -20,10 +20,8 @@ int Max1Rows(vector<vector<int>> &v){
                     maxOnesRows = i;
                 }
                 break;
-            }
-            
+            } 
         }
-        
     }
    return maxOnesRows; 
 }
