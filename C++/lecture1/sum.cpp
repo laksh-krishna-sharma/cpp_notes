@@ -12,7 +12,7 @@ int main(){
     cin>>b;
 
     cout<<"sum of given numbers is : ";
-    cout<<a+b;
+    cout<<a+b<<endl;
 
     return 0;
 }
