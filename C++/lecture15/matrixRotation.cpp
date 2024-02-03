@@ -19,6 +19,7 @@ int rotatedMatrix(vector<vector<int>> &v){
         reverse(v[i].begin(),v[i].end());
     }
     
+    return 0;
 }
 
 int main(){
