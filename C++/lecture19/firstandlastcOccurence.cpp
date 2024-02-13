@@ -1,6 +1,4 @@
 #include <bits/stdc++.h>
-#include <iostream>
-#include <string>
 using namespace std;
 
 void firstAndLastIndex(string s, char ch, int *first, int *last){
