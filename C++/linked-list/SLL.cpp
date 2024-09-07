@@ -96,17 +96,27 @@ int main(){
     node* n = NULL;
 
     insertAtHead(n,5);
+    display(n);
     insertAtHead(n,4);
+    display(n);
     insertAtHead(n,3);
+    display(n);
     insertAtHead(n,2);
+    display(n);
     insertAtHead(n,1);
+    display(n);
 
     insertAtTail(n,7);
+    display(n);
     insertAtTail(n,8);
+    display(n);
     insertAtTail(n,9);
+    display(n);
     insertAtTail(n,10);
+    display(n);
 
     insertAtPos(n, 6, 5);
+    display(n);
     deleteAtPos(n, 9);
     display(n);
  
