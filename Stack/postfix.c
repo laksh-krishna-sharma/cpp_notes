@@ -1,43 +1,58 @@
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include "stack.h"
 
-typedef struct stack {
-    int data[100];
-    int top;
-} stack ;
-
-int empty(stack *s) {return (s->top == -1);}
-int top(stack *s) {return s->data[s->top];}
-void push(stack *s, int x) {s->data[++s->top] = x;}
-void pop(stack *s) {if (!empty(s)) s->top--;}
-
-int evaluatePostfix(char *s){
+int evaluatePostfix(char *s) {
     stack st;
-    st.top = -1;
+    stack_init(&st);
+
     int n = strlen(s);
-    for(int i = 0; i < n; i++){
-        if(s[i] >= '0' && s[i] <= '9'){
-            push(&st, s[i] - '0');
+    for (int i = 0; i < n; i++) {
+        if (isdigit(s[i])) {
+            stack_push(&st, s[i] - '0');
         } else {
-            int a = top(&st);
-            pop(&st);
-            int b = top(&st);
-            pop(&st);
-            if(s[i] == '+'){
-                push(&st, a + b);
-            } else if(s[i] == '-'){
-                push(&st, b - a);
-            } else if(s[i] == '*'){
-                push(&st, a * b);
-            } else if(s[i] == '/'){
-                push(&st, b / a);
+            if (stack_empty(&st)) {
+                fprintf(stderr, "Error: Invalid expression\n");
+                return -1;
+            }
+            int a = stack_top(&st);
+            stack_pop(&st);
+
+            if (stack_empty(&st)) {
+                fprintf(stderr, "Error: Invalid expression\n");
+                return -1;
+            }
+            int b = stack_top(&st);
+            stack_pop(&st);
+
+            switch (s[i]) {
+                case '+': stack_push(&st, b + a); break;
+                case '-': stack_push(&st, b - a); break;
+                case '*': stack_push(&st, b * a); break;
+                case '/':
+                    if (a == 0) {
+                        fprintf(stderr, "Error: Division by zero\n");
+                        return -1;
+                    }
+                    stack_push(&st, b / a);
+                    break;
+                default:
+                    fprintf(stderr, "Error: Unknown operator '%c'\n", s[i]);
+                    return -1;
             }
         }
     }
-    return top(&st);
+
+    if (stack_empty(&st)) {
+        fprintf(stderr, "Error: Invalid expression\n");
+        return -1;
+    }
+
+    return stack_top(&st);
 }
 
-int main(){
+int main() {
     char postfixExpr[] = "231*+9-";
     printf("Result of postfix evaluation: %d\n", evaluatePostfix(postfixExpr));
     return 0;

@@ -1,33 +1,38 @@
+#include "stack.h"
 #include <stdio.h>
 
-typedef struct stack {
-    int data[100];
-    int top;
-} stack ;
+void stack_init(stack *s) {
+    s->top = -1;
+}
 
-int empty(stack *s) {return (s->top == -1);}
-int top(stack *s) {return s->data[s->top];}
-void push(stack *s, int x) {s->data[++s->top] = x;}
-void pop(stack *s) {if (!empty(s)) s->top--;}
+int stack_empty(stack *s) {
+    return (s->top == -1);
+}
 
-int main(){
-    stack s;
-    s.top = -1;
-    
-    push(&s, 1);
-    push(&s, 2);
-    push(&s, 3);
-    
-    printf("%d\n", top(&s));
-    
-    pop(&s);
-    printf("%d\n", top(&s));
-    
-    pop(&s);
-    printf("%d\n", top(&s));
-    
-    pop(&s);
-    printf("%d\n", top(&s));
+int stack_full(stack *s) {
+    return (s->top == STACK_SIZE - 1);
+}
 
-    return 0;
+int stack_top(stack *s) {
+    if (stack_empty(s)) {
+        fprintf(stderr, "Error: Stack is empty\n");
+        return -1;  // Indicating error
+    }
+    return s->data[s->top];
+}
+
+void stack_push(stack *s, int x) {
+    if (stack_full(s)) {
+        fprintf(stderr, "Error: Stack overflow\n");
+        return;
+    }
+    s->data[++s->top] = x;
+}
+
+void stack_pop(stack *s) {
+    if (stack_empty(s)) {
+        fprintf(stderr, "Error: Stack underflow\n");
+        return;
+    }
+    s->top--;
 }

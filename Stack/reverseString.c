@@ -1,26 +1,17 @@
 #include<stdio.h>
 #include<string.h>
-
-typedef struct stack {
-    int data[100];
-    int top;
-} stack ;
-
-int empty(stack *s) {return (s->top == -1);}
-int top(stack *s) {return s->data[s->top];}
-void push(stack *s, int x) {s->data[++s->top] = x;}
-void pop(stack *s) {if (!empty(s)) s->top--;}
+#include "stack.h"
 
 void reverseString(char *s){
     stack st;
     st.top = -1;
     
     for (int i = 0; i < strlen(s); i++)
-        push(&st, s[i]);
+        stack_push(&st, s[i]);
     
     for (int i = 0; i < strlen(s); i++){
-        s[i] = top(&st);
-        pop(&st);
+        s[i] = stack_top(&st);
+        stack_pop(&st);
     }
 }
 
