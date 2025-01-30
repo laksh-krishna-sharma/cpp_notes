@@ -11,7 +11,6 @@ int top(stack *s) {return s->data[s->top];}
 void push(stack *s, int x) {s->data[++s->top] = x;}
 void pop(stack *s) {if (!empty(s)) s->top--;}
 
-// write postfix evaluation function here
 int evaluatePostfix(char *s){
     stack st;
     st.top = -1;
