@@ -4,7 +4,7 @@
 
 void reverseString(char *s){
     stack st;
-    st.top = -1;
+    stack_init(&st);
     
     for (int i = 0; i < strlen(s); i++)
         stack_push(&st, s[i]);

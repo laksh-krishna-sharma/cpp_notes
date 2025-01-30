@@ -1,8 +1,6 @@
 #ifndef __STACK_H__
 #define __STACK_H__
 
-#include <stdbool.h>
-
 #define STACK_SIZE 100
 
 typedef struct stack {
